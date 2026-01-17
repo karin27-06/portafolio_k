@@ -1,0 +1,360 @@
+---
+const redes = [
+  { nombre: "GitHub", url: "https://github.com/tuusuario", icono: "🐙" },
+  { nombre: "LinkedIn", url: "https://linkedin.com/in/tuusuario", icono: "💼" },
+  { nombre: "Twitter", url: "https://twitter.com/tuusuario", icono: "🐦" }
+];
+---
+
+<section id="contacto" class="section dark">
+  <div class="container">
+    <h2 class="section-title fade-in-scroll">Contacto</h2>
+    <p class="contact-intro fade-in-scroll">
+      ¿Tienes un proyecto en mente? ¡Hablemos!
+    </p>
+    
+    <form id="contact-form" class="contact-form fade-in-scroll">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="asunto">Asunto</label>
+        <input type="text" id="asunto" name="asunto" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+      </div>
+      
+      <button type="submit" class="submit-button">
+        <span class="button-text">Enviar Mensaje</span>
+        <span class="button-loader" style="display: none;">Enviando...</span>
+      </button>
+      
+      <div id="form-message" class="form-message"></div>
+    </form>
+
+    <div class="social-links fade-in-scroll">
+      {redes.map(red => (
+        <a href={red.url} class="social-link" target="_blank" rel="noopener">
+          <span class="icon">{red.icono}</span>
+          <span>{red.nombre}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const formMessage = document.getElementById('form-message') as HTMLDivElement | null;
+  const buttonText = document.querySelector('.button-text') as HTMLSpanElement | null;
+  const buttonLoader = document.querySelector('.button-loader') as HTMLSpanElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!form || !formMessage || !buttonText || !buttonLoader) return;
+    
+    const formData = new FormData(form);
+    const data = {
+      nombre: formData.get('nombre'),
+      email: formData.get('email'),
+      asunto: formData.get('asunto'),
+      mensaje: formData.get('mensaje')
+    };
+
+    buttonText.style.display = 'none';
+    buttonLoader.style.display = 'inline';
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+
+    if (!data.nombre || !data.email || !data.asunto || !data.mensaje) {
+      formMessage.textContent = 'Por favor completa todos los campos.';
+      formMessage.classList.add('error');
+      autoHideMessage();
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(String(data.email))) {
+      formMessage.textContent = 'Por favor ingresa un correo válido.';
+      formMessage.classList.add('error');
+      autoHideMessage();
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        formMessage.textContent = '¡Mensaje enviado con éxito! Te contactaré pronto.';
+        formMessage.classList.add('success');
+        autoHideMessage();
+        form.reset();
+      } else {
+        formMessage.textContent = result.message || 'Hubo un error al enviar el mensaje.';
+        formMessage.classList.add('error');
+        autoHideMessage();
+      }
+    } catch (error) {
+      formMessage.textContent = 'Error de conexión. Por favor, intenta de nuevo.';
+      formMessage.classList.add('error');
+      autoHideMessage();
+    } finally {
+      buttonText.style.display = 'inline';
+      buttonLoader.style.display = 'none';
+    }
+  });
+
+  function autoHideMessage() {
+    setTimeout(() => {
+      if (formMessage) {
+        formMessage.textContent = '';
+        formMessage.className = 'form-message';
+      }
+    }, 4000);
+  }
+</script>
+
+<style>
+  .section {
+    padding: 1rem 2rem;
+    background: white;
+  }
+
+  .section.dark {
+    background: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+
+  .contact-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+  }
+
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+
+  .submit-button:active {
+    transform: translateY(0);
+  }
+
+  .form-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover {
+    background: #764ba2;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  .fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body.dark-mode .section.dark {
+    background: #020617;
+  }
+
+  body.dark-mode .section-title,
+  body.dark-mode label {
+    color: #e5e7eb;
+  }
+
+  body.dark-mode .contact-intro {
+    color: #cbd5f5;
+  }
+
+  body.dark-mode .contact-form {
+    background: #020617;
+    border: 1px solid #1e293b;
+  }
+
+  body.dark-mode .form-group label {
+    color: #e5e7eb;
+  }
+
+  body.dark-mode .form-group input,
+  body.dark-mode .form-group textarea {
+    background: #020617;
+    color: #e5e7eb;
+    border-color: #334155;
+  }
+
+  body.dark-mode .form-group input:focus,
+  body.dark-mode .form-group textarea:focus {
+    border-color: #667eea;
+  }
+
+  body.dark-mode .form-message.success {
+    background: #064e3b;
+    color: #d1fae5;
+    border-color: #065f46;
+  }
+
+  body.dark-mode .form-message.error {
+    background: #450a0a;
+    color: #fee2e2;
+    border-color: #7f1d1d;
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: 2.5rem 1.5rem;
+    }
+    .section-title {
+      font-size: 2rem;
+    }
+    .contact-form {
+      padding: 1.5rem;
+    }
+    .social-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

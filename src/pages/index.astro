@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SobreMi from '../components/SobreMi.astro';
+import Habilidades from '../components/Habilidades.astro';
+import Tecnologias from '../components/Tecnologias.astro';
+import Proyectos from '../components/Proyectos.astro';
+import Contacto from '../components/Contacto.astro';
+---
+
+<Layout title="Mi Portafolio">
+  <main>
+    <Hero />
+    <SobreMi />
+    <Habilidades />
+    <Tecnologias />
+    <Proyectos />
+    <Contacto />
+
+    <footer>
+      <p>&copy; 2026 Karin Chozo. Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</Layout>
+
+<script>
+  // Animaciones al hacer scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Smooth scroll para los enlaces
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      if (href) {
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  main {
+    width: 100%;
+  }
+
+  footer {
+    background: #2d3748;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  body.dark-mode footer {
+    background: #020617;
+  }
+</style>

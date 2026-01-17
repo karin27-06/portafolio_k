@@ -1,0 +1,189 @@
+---
+const proyectos = [
+  {
+    titulo: "E-commerce con React",
+    descripcion: "Tienda online completa con carrito de compras y pasarela de pagos",
+    tecnologias: ["React", "Node.js", "MongoDB"],
+    github: "https://github.com/tuusuario/ecommerce-react"
+  },
+  {
+    titulo: "App de Tareas",
+    descripcion: "Aplicación de gestión de tareas con autenticación",
+    tecnologias: ["Vue.js", "Firebase"],
+    github: "https://github.com/tuusuario/app-tareas"
+  },
+  {
+    titulo: "Dashboard Analítico",
+    descripcion: "Panel de control con gráficos y estadísticas en tiempo real",
+    tecnologias: ["Next.js", "Chart.js", "PostgreSQL"],
+    github: "https://github.com/tuusuario/dashboard-analitico"
+  }
+];
+---
+
+<section id="proyectos" class="section">
+  <div class="container">
+    <h2 class="section-title fade-in-scroll">Mis Proyectos</h2>
+    <div class="projects-grid">
+      {proyectos.map((proyecto, index) => (
+        <div class="project-card fade-in-scroll" style={`animation-delay: ${index * 0.2}s`}>
+          <div class="project-header">
+            <h3>{proyecto.titulo}</h3>
+            <a 
+              href={proyecto.github}
+              target="_blank"
+              rel="noopener"
+              class="github-link"
+              title="Ver repositorio en GitHub"
+            >
+              <i class="devicon-github-original"></i>
+            </a>
+          </div>
+          <p>{proyecto.descripcion}</p>
+          <div class="tech-tags">
+            {proyecto.tecnologias.map(tech => (
+              <span class="tag">{tech}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 1rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-card h3 {
+    color: #667eea;
+    margin-bottom: 0;
+  }
+
+  .github-link {
+    font-size: 1.6rem;
+    color: #1f2937;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .github-link:hover {
+    transform: scale(1.2);
+    color: #000;
+  }
+
+  .project-card p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: #667eea;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+
+  .fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body.dark-mode .section {
+    background: #0f172a;
+  }
+
+  body.dark-mode .section-title {
+    color: #e5e7eb;
+  }
+
+  body.dark-mode .project-card {
+    background: #020617;
+    border: 1px solid #1e293b;
+  }
+
+  body.dark-mode .project-card p {
+    color: #cbd5f5;
+  }
+
+  body.dark-mode .github-link {
+    color: #e5e7eb;
+  }
+
+  body.dark-mode .github-link:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: 2.5rem 1.5rem;
+    }
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
