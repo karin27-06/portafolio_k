@@ -1,152 +1,253 @@
 ---
-const habilidades = [
-  { nombre: "JavaScript", nivel: 90 },
-  { nombre: "React", nivel: 85 },
-  { nombre: "Node.js", nivel: 80 },
-  { nombre: "CSS/Tailwind", nivel: 85 },
-  { nombre: "Python", nivel: 75 },
-  { nombre: "MongoDB", nivel: 70 },
-  { nombre: "Git", nivel: 85 },
-  { nombre: "Astro", nivel: 80 }
+const skillCategories = [
+  {
+    title: "Frontend",
+    skills: [
+      { nombre: "JavaScript", nivel: 90, icon: "devicon-javascript-plain" },
+      { nombre: "TypeScript", nivel: 85, icon: "devicon-typescript-plain" },
+      { nombre: "Vue", nivel: 85, icon: "devicon-vuejs-plain" },
+      { nombre: "React", nivel: 85, icon: "devicon-react-original" },
+      { nombre: "Angular", nivel: 75, icon: "devicon-angularjs-plain" },
+      { nombre: "Astro", nivel: 80, icon: "devicon-astro-plain" },
+      { nombre: "CSS / Tailwind", nivel: 85, icon: "devicon-tailwindcss-plain" }
+    ]
+  },
+  {
+    title: "Backend",
+    skills: [
+      { nombre: "PHP", nivel: 85, icon: "devicon-php-plain" },
+      { nombre: "Laravel", nivel: 90, icon: "devicon-laravel-plain" },
+      { nombre: "Node.js", nivel: 80, icon: "devicon-nodejs-plain" },
+      { nombre: "PostgreSQL", nivel: 80, icon: "devicon-postgresql-plain" }
+    ]
+  },
+  {
+    title: "DevOps & Tools",
+    skills: [
+      { nombre: "Docker", nivel: 75, icon: "devicon-docker-plain" },
+      { nombre: "Git", nivel: 85, icon: "devicon-git-plain" },
+      { nombre: "Vercel", nivel: 80, icon: "devicon-vercel-original" }
+    ]
+  }
 ];
 ---
 
-<section id="habilidades" class="section dark">
+<section id="habilidades" class="skills-section">
   <div class="container">
     <h2 class="section-title fade-in-scroll">Habilidades</h2>
-    <div class="skills-grid">
-      {habilidades.map((skill, index) => (
-        <div class="skill-item fade-in-scroll" style={`animation-delay: ${index * 0.1}s`}>
-          <div class="skill-header">
-            <span class="skill-name">{skill.nombre}</span>
-            <span class="skill-percent">{skill.nivel}%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" style={`width: ${skill.nivel}%`}></div>
-          </div>
+
+    {skillCategories.map((category, catIndex) => (
+      <div class="skill-category fade-in-scroll" style={`--delay:${catIndex}`}>
+        <h3 class="category-title">{category.title}</h3>
+
+        <div class="skills-grid">
+          {category.skills.map((skill, skillIndex) => (
+            <div class="skill-card fade-in-scroll" style={`--delay:${skillIndex}`}>
+              <div class="skill-header">
+                <div class="skill-left">
+                  <i class={`skill-icon ${skill.icon}`}></i>
+                  <span class="skill-name">{skill.nombre}</span>
+                </div>
+                <span class="skill-percent">{skill.nivel}%</span>
+              </div>
+
+              <div class="skill-bar">
+                <div class="skill-progress" data-level={skill.nivel}></div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
 </section>
 
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add('visible');
+
+      const bar = entry.target.querySelector('.skill-progress');
+      if (bar instanceof HTMLElement && bar.dataset.level) {
+        bar.style.width = `${bar.dataset.level}%`;
+      }
+
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
+</script>
+
 <style>
-  @keyframes progressBar {
-    from { width: 0; }
-  }
+  /* =========================
+   SECTION
+========================= */
+.skills-section {
+  padding: 5rem 2rem;
+  background: #f8f9fa;
+}
 
-  .section {
-    padding: 1rem 2rem;
-    background: white;
-  }
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
 
-  .section.dark {
-    background: #f8f9fa;
-  }
+/* =========================
+   TITLES
+========================= */
+.section-title {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #1e293b;
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+.section-title::after {
+  content: '';
+  width: 80px;
+  height: 4px;
+  display: block;
+  margin: 1rem auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.category-title {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #667eea;
+}
+
+/* =========================
+   GRID
+========================= */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* =========================
+   CARD
+========================= */
+.skill-card {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.skill-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.skill-icon {
+  font-size: 1.4rem;
+  color: #667eea;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.skill-percent {
+  font-weight: 600;
+  color: #667eea;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+.skill-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  width: 0;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transition: width 1.4s ease-out;
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--delay, 0) * 0.12s);
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   DARK MODE
+========================= */
+body.dark-mode .skills-section {
+  background: #020617;
+}
+
+body.dark-mode .skill-card {
+  background: #020617;
+  border: 1px solid #1e293b;
+}
+
+body.dark-mode .section-title,
+body.dark-mode .skill-name {
+  color: #e5e7eb;
+}
+
+body.dark-mode .skill-icon,
+body.dark-mode .category-title {
+  color: #a5b4fc;
+}
+
+body.dark-mode .skill-bar {
+  background: #1e293b;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .skills-section {
+    padding: 4rem 1.5rem;
   }
 
   .section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #333;
-    position: relative;
+    font-size: 2rem;
   }
 
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    margin: 1rem auto 0;
-    border-radius: 2px;
+  .category-title {
+    font-size: 1.4rem;
   }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .skill-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .skill-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.8rem;
-  }
-
-  .skill-name {
-    font-weight: 600;
-    color: #333;
-  }
-
-  .skill-percent {
-    color: #667eea;
-    font-weight: 600;
-  }
-
-  .skill-bar {
-    height: 8px;
-    background: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 10px;
-    animation: progressBar 1.5s ease-out;
-  }
-
-  .fade-in-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-
-  .fade-in-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  body.dark-mode .section.dark {
-    background: #020617;
-  }
-
-  body.dark-mode .section-title,
-  body.dark-mode .skill-name {
-    color: #e5e7eb;
-  }
-
-  body.dark-mode .skill-item {
-    background: #020617;
-    border: 1px solid #1e293b;
-  }
-
-  body.dark-mode .skill-bar {
-    background: #1e293b;
-  }
-
-  @media (max-width: 768px) {
-    .section {
-      padding: 2.5rem 1.5rem;
-    }
-    .section-title {
-      font-size: 2rem;
-    }
-  }
+}
 </style>

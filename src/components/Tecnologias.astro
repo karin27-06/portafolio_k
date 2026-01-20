@@ -1,90 +1,227 @@
-<section id="tecnologias" class="section">
-  <div class="container">
-    <h2 class="section-title fade-in-scroll">Tecnologías</h2>
-    <div class="tech-icons">
-      <i class="devicon-php-plain colored"></i>
-      <i class="devicon-laravel-original colored"></i>
-      <i class="devicon-vuejs-plain colored"></i>
-      <i class="devicon-astro-plain colored"></i>
-      <i class="devicon-react-original colored"></i>
-      <i class="devicon-nextjs-original"></i>
-      <i class="devicon-flutter-plain colored"></i>
-      <i class="devicon-typescript-plain colored"></i>
-      <i class="devicon-javascript-plain colored"></i>
+<section id="tecnologias" class="section tech-section">
+  <div class="container fade-in-scroll">
+    <h2 class="section-title">Tecnologías</h2>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <i class="devicon-php-plain colored"></i>
+        <span>PHP</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-laravel-original colored"></i>
+        <span>Laravel</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-vuejs-plain colored"></i>
+        <span>Vue.js</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-astro-plain colored"></i>
+        <span>Astro</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-react-original colored"></i>
+        <span>React</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-angular-plain"></i>
+        <span>Angular</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-nextjs-plain"></i>
+        <span>Next.js</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-nodejs-plain colored"></i>
+        <span>Node.js</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-postgresql-plain colored"></i>
+        <span>PostgreSQL</span>
+      </div>
+
+      <div class="tech-card">
+          <i class="devicon-mysql-original colored"></i>
+        <span>MySql</span>
+      </div>
+      
+      <div class="tech-card">
+        <i class="devicon-git-plain colored"></i>
+        <span>Git</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-tailwindcss-plain colored"></i>
+        <span>Tailwind CSS</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-flutter-plain colored"></i>
+        <span>Flutter</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-typescript-plain colored"></i>
+        <span>TypeScript</span>
+      </div>
+
+      <div class="tech-card">
+        <i class="devicon-javascript-plain colored"></i>
+        <span>JavaScript</span>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .section {
-    padding: 1rem 2rem;
-    background: white;
-  }
+  /* =========================
+   BASE
+========================= */
+.section {
+  padding: 5rem 2rem;
+  background: #ffffff;
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================
+   TITLE
+========================= */
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: clamp(50px, 20%, 90px);
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  margin: 1rem auto 0;
+  border-radius: 999px;
+}
+
+/* =========================
+   GRID
+========================= */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =========================
+   CARD
+========================= */
+.tech-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+}
+
+.tech-card i {
+  font-size: 3.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.tech-card span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* =========================
+   HOVER
+========================= */
+.tech-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(102,126,234,0.35);
+}
+
+.tech-card:hover i {
+  filter: drop-shadow(0 0 12px rgba(102,126,234,.6));
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   DARK MODE
+========================= */
+body.dark-mode .section {
+  background: #0f172a;
+}
+
+body.dark-mode .section-title {
+  color: #e5e7eb;
+}
+
+body.dark-mode .tech-card {
+  background: #020617;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .tech-card span {
+  color: #cbd5f5;
+}
+body.dark-mode .devicon-nextjs-plain {
+  color: #ffffff;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1.5rem;
   }
 
   .section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #333;
-    position: relative;
+    font-size: 2rem;
   }
 
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    margin: 1rem auto 0;
-    border-radius: 2px;
+  .tech-grid {
+    gap: 1.8rem;
   }
 
-  .tech-icons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    font-size: 3rem;
+  .tech-card {
+    padding: 1.6rem 0.8rem;
   }
 
-  .tech-icons i {
-    transition: transform .3s;
+  .tech-card i {
+    font-size: 2.6rem;
   }
-
-  .tech-icons i:hover {
-    transform: scale(1.2);
-  }
-
-  .fade-in-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-
-  .fade-in-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  body.dark-mode .section {
-    background: #0f172a;
-  }
-
-  body.dark-mode .section-title {
-    color: #e5e7eb;
-  }
-
-  @media (max-width: 768px) {
-    .section {
-      padding: 2.5rem 1.5rem;
-    }
-    .section-title {
-      font-size: 2rem;
-    }
-  }
+}
 </style>

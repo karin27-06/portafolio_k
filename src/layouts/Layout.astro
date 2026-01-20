@@ -1,5 +1,6 @@
 ---
 // src/layouts/Layout.astro
+import "../styles/tailwind.css";
 const { title } = Astro.props;
 ---
 
@@ -7,11 +8,10 @@ const { title } = Astro.props;
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Karin Hair Chozo Santamaria - Desarrolladora Full Stack" />
+  <meta name="description" content="Karin Hair Chozo Santamaria - Desarrollador Full Stack" />
   <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/public/images/k.png" />
 
-  <!-- Font Awesome + Devicons -->
+<link rel="icon" href="/images/k.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
 
@@ -43,48 +43,36 @@ const { title } = Astro.props;
   </header>
 
   <slot />
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-
-    if (!menuToggle || !nav) return;
-
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-    });
-  });
-</script>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('theme-toggle');
-    if (!toggle) return;
-
-    const icon = toggle.querySelector('i');
-    if (!icon) return;
-
-    const storedTheme = localStorage.getItem('theme');
-
-    if (storedTheme === 'dark') {
-      document.body.classList.add('dark-mode');
-      icon.classList.replace('fa-moon', 'fa-sun');
-    }
-
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-
-      const isDark = document.body.classList.contains('dark-mode');
-      icon.classList.toggle('fa-sun', isDark);
-      icon.classList.toggle('fa-moon', !isDark);
-
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-  });
-</script>
-
 </body>
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // menu mobile
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
+
+  menuToggle?.addEventListener('click', () => {
+    nav?.classList.toggle('open');
+  });
+
+  // theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  const icon = toggle?.querySelector('i');
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    icon?.classList.replace('fa-moon', 'fa-sun');
+  }
+
+  toggle?.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    icon?.classList.toggle('fa-sun', isDark);
+    icon?.classList.toggle('fa-moon', !isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+});
+</script>
 
 <style is:global>
   :root {
@@ -156,6 +144,8 @@ const { title } = Astro.props;
     font-weight:600;
     color:inherit;
     position:relative;
+    text-align: left;
+    padding: .4rem .2rem;
   }
 
   nav a::after {
@@ -196,16 +186,17 @@ const { title } = Astro.props;
 
 /* MOBILE */
 @media (max-width: 768px) {
-  nav {
+  header nav {
     position: absolute;
     top: 70px;
+    left: 20px;
     right: 20px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.2rem;
     gap: 1rem;
     box-shadow: 0 10px 30px rgba(0,0,0,.15);
     opacity: 0;
@@ -214,11 +205,11 @@ const { title } = Astro.props;
     transition: .3s ease;
   }
 
-  body.dark-mode nav {
+  body.dark-mode header nav {
     background: rgba(15,23,42,.95);
   }
 
-  nav.open {
+  header nav.open {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);

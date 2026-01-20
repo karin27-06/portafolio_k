@@ -2,25 +2,42 @@
 ---
 
 <section id="inicio" class="hero">
-  <div class="hero-content fade-in">
-    <div class="profile-container">
-      <div class="profile-image float-animation">
-        <div class="profile-flip">
-          <div class="profile-front">
-            <img src="/images/perfil.png" alt="Karin Hair Chozo Santamaria" />
-          </div>
-          <div class="profile-back">
-            <img src="/images/karin.gif" alt="Karin saludando" />
+  <div class="hero-grid fade-in">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="hero-text">
+      <h1 class="hero-title slide-up">
+        Hola, soy <span>Karin Santamaria</span>
+      </h1>
+
+      <p class="hero-description slide-up delay-1">
+        Desarrollador Full Stack en Perú especializado en crear soluciones web óptimas
+        y eficientes con <strong>Laravel, Vue, Bootstrap, Astro y Node.js</strong> para
+        impulsar el crecimiento digital de pequeñas y grandes empresas.
+      </p>
+
+      <div class="hero-buttons slide-up delay-2">
+        <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn-secondary">Contáctame</a>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="hero-image">
+      <div class="profile-container float-animation">
+        <div class="profile-image">
+          <div class="profile-flip">
+            <div class="profile-front">
+              <img src="/images/perfil.png" alt="Karin Santamaria" />
+            </div>
+            <div class="profile-back">
+              <img src="/images/karin.gif" alt="Karin saludando" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <h1 class="slide-up">Karin Santamaria</h1>
-    <h2 class="slide-up delay-1">Desarrollador Full Stack</h2>
-    <p class="tagline slide-up delay-2">
-      Creando experiencias web modernas y funcionales
-    </p>
-    <a href="#contacto" class="cta-button slide-up delay-3">Contáctame</a>
+
   </div>
 </section>
 
@@ -33,246 +50,266 @@
 </script>
 
 <style>
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+ /* =========================
+   ANIMACIONES
+========================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-  }
-
-  @keyframes pulseRing {
-    0% {
-      transform: scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.3;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.6;
-    }
-  }
-
-  .fade-in {
-    animation: fadeIn 1s ease-out;
-  }
-
-  .slide-up {
-    animation: slideUp 0.8s ease-out;
-  }
-
-  .slide-up.delay-1 {
-    animation-delay: 0.2s;
+@keyframes slideUp {
+  from {
     opacity: 0;
-    animation-fill-mode: forwards;
+    transform: translateY(30px);
   }
-
-  .slide-up.delay-2 {
-    animation-delay: 0.4s;
-    opacity: 0;
-    animation-fill-mode: forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  .slide-up.delay-3 {
-    animation-delay: 0.6s;
-    opacity: 0;
-    animation-fill-mode: forwards;
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
 
-  .float-animation {
-    animation: float 3s ease-in-out infinite;
-  }
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
 
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* =========================
+   UTILIDADES
+========================= */
+.fade-in { animation: fadeIn 1s ease-out; }
+
+.slide-up { animation: slideUp 0.8s ease-out; }
+
+.delay-1 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.delay-2 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: auto;
+  align-items: center;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1e293b;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #475569;
+  text-align: justify;
+}
+
+.hero-buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* =========================
+   BOTONES
+========================= */
+.btn-primary,
+.btn-secondary {
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  border: 2px solid #667eea;
+  color: #667eea;
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background: #667eea;
+  color: white;
+}
+
+/* =========================
+   IMAGEN / FLIP
+========================= */
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+
+.profile-container::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  opacity: 0.6;
+  animation: pulseRing 2s ease-in-out infinite;
+  z-index: -1;
+}
+
+.profile-image {
+  width: 260px;
+  height: 260px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.profile-flip {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.profile-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+.profile-front,
+.profile-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.profile-back {
+  transform: rotateY(180deg);
+}
+
+.profile-front img,
+.profile-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image:hover .profile-flip:not(.flipped) {
+  transform: scale(1.05);
+}
+
+/* =========================
+   DARK MODE
+========================= */
+body.dark-mode .hero-title {
+  color: #f8fafc;
+}
+
+body.dark-mode .hero-description {
+  color: rgba(255,255,255,0.8);
+}
+
+body.dark-mode .profile-front,
+body.dark-mode .profile-back {
+  border-color: #1e293b;
+}
+
+/* =========================
+   RESPONSIVE (CLAVE)
+========================= */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
     text-align: center;
-    padding: 2rem;
   }
 
-  .hero-content {
-    max-width: 800px;
+  /* Reordenamos bloques principales */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    order: 1;
   }
 
-  .profile-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 2rem;
+  .hero-image {
+    order: 2;
+    margin: 2rem 0;
   }
 
-  /* Anillo animado detrás de la imagen */
-  .profile-container::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    opacity: 0.6;
-    animation: pulseRing 2s ease-in-out infinite;
-    z-index: -1;
+  /* Reordenamos contenido interno */
+  .hero-title {
+    order: 1;
+    font-size: 2.8rem; /* un poquito más grande */
   }
 
+  .hero-description {
+    order: 3;
+    text-align: justify;
+    font-size: 1.15rem;
+  }
+
+  .hero-buttons {
+    order: 4;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .profile-container,
   .profile-image {
     width: 200px;
     height: 200px;
-    cursor: pointer;
-    perspective: 1000px;
   }
-
-  .profile-flip {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-  }
-
-  .profile-flip.flipped {
-    transform: rotateY(180deg);
-  }
-
-  .profile-front,
-  .profile-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  .profile-back {
-    transform: rotateY(180deg);
-  }
-
-  .profile-front img,
-  .profile-back img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Efecto hover */
-  .profile-image:hover .profile-flip:not(.flipped) {
-    transform: scale(1.05);
-  }
-
-  /* Indicador visual de que es clickeable */
-  .profile-image::after {
-    position: absolute;
-    bottom: -5px;
-    right: -5px;
-    background: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: float 2s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  body.dark-mode .profile-image::after {
-    background: #1e293b;
-  }
-
-  h1 {
-    font-size: 3.5rem;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-
-  body.dark-mode h1 {
-    color: #f8fafc;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    color: #334155;
-    font-weight: 400;
-  }
-
-  .tagline {
-    font-size: 1.2rem;
-    color: #475569;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  body.dark-mode h2 {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  body.dark-mode .tagline {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .cta-button {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: white;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  body.dark-mode .profile-front,
-  body.dark-mode .profile-back {
-    border-color: #1e293b;
-  }
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2.5rem;
-    }
-    
-    .profile-container,
-    .profile-image {
-      width: 150px;
-      height: 150px;
-    }
-    
-    .profile-image::after {
-      width: 35px;
-      height: 35px;
-      font-size: 1rem;
-    }
-  }
+}
 </style>
