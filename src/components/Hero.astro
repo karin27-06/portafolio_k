@@ -1,7 +1,7 @@
 ---
 ---
 
-<section id="inicio" class="hero">
+<section id="inicio" class="hero" aria-label="Presentación principal">
   <div class="hero-grid fade-in">
 
     <!-- COLUMNA IZQUIERDA -->
@@ -10,11 +10,13 @@
         Hola, soy <span>Karin Santamaria</span>
       </h1>
 
-      <p class="hero-description slide-up delay-1">
-        Desarrollador Full Stack en Perú especializado en crear soluciones web óptimas
-        y eficientes con <strong>Laravel, Vue, Bootstrap, Astro y Node.js</strong> para
-        impulsar el crecimiento digital de pequeñas y grandes empresas.
-      </p>
+<p class="hero-description slide-up delay-1">
+  Desarrollador Full Stack en Perú con experiencia en el desarrollo de aplicaciones web modernas.
+  Especializado en <strong>Laravel, Vue, Astro, Node.js y Bootstrap</strong>,
+  enfocado en crear soluciones escalables, eficientes y orientadas al negocio
+  para empresas y emprendimientos digitales.
+</p>
+
 
       <div class="hero-buttons slide-up delay-2">
         <a href="#proyectos" class="btn-primary">Ver proyectos</a>
@@ -28,10 +30,18 @@
         <div class="profile-image">
           <div class="profile-flip">
             <div class="profile-front">
-              <img src="/images/perfil.png" alt="Karin Santamaria" />
+<img
+  src="/images/perfil.png"
+  width="260"
+  height="260"
+  alt="Karin Santamaria, desarrollador full stack"
+/>
             </div>
             <div class="profile-back">
-              <img src="/images/karin.gif" alt="Karin saludando" />
+<img
+  src="/images/karin.gif"
+  alt="Karin Santamaria saludando, desarrollador web"
+/>
             </div>
           </div>
         </div>
@@ -42,12 +52,15 @@
 </section>
 
 <script>
-  const profileFlip = document.querySelector('.profile-flip');
-  
-  profileFlip?.addEventListener('click', () => {
-    profileFlip.classList.toggle('flipped');
+  document.addEventListener('DOMContentLoaded', () => {
+    const profileFlip = document.querySelector('.profile-flip');
+
+    profileFlip?.addEventListener('click', () => {
+      profileFlip.classList.toggle('flipped');
+    });
   });
 </script>
+
 
 <style>
  /* =========================

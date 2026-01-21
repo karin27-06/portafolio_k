@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karin-santamaria.vercel.app/sitemap.xml
