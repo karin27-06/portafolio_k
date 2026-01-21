@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SobreMi from '../components/SobreMi.astro';
+import Habilidades from '../components/Habilidades.astro';
+import Tecnologias from '../components/Tecnologias.astro';
+import Proyectos from '../components/Proyectos.astro';
+import Contacto from '../components/Contacto.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Karin Santamaria | Desarrollador Full Stack Web"
+  description="Desarrollador Full Stack con experiencia en Laravel, Vue, React, Astro y Node.js. Portafolio profesional con proyectos reales."
+>
+  <main>
+    <Hero />
+    <SobreMi />
+    <Habilidades />
+    <Tecnologias />
+    <Proyectos />
+    <Contacto />
+    <Footer />
+  </main>
+</Layout>
+
+<script>
+  // Animaciones al hacer scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Smooth scroll para los enlaces
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const href = anchor.getAttribute('href');
+    if (!href) return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+
+    // 🔥 actualiza la URL sin recargar
+    history.pushState(null, '', href);
+  });
+});
+</script>
+
+<style>
+  footer {
+    background: #2d3748;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  body.dark-mode footer {
+    background: #020617;
+  }
+</style>
