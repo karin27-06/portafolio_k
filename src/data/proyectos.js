@@ -1,4 +1,49 @@
 export const proyectos = [
+      //ADMINISTRACION
+  {
+    slug: "administracion",
+    titulo: "Sistema de administración de productos tecnologicos",
+    descripcionCorta: "Aplicación encargada del registro de servicios tecnologicos exclusivos de desarrollo.",
+    descripcionCompleta:
+      "Aplicación enfocada en la productividad personal, permite crear, editar y eliminar tareas con autenticación segura usando Firebase.",
+    fecha: "2024-05-02",
+    tecnologias: ["Vue.js", "Firebase"],
+    imagenes: [
+      "/images/proyectos/adminiscapt.png",
+      "/images/proyectos/adminiscapt2.png",
+      "/images/proyectos/adminiscapt3.png",
+    ],
+    github: "https://github.com/tuusuario/app-tareas",
+    demo: "https://app-tareas.web.app",
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    caracteristicas: [
+      "Login con Google",
+      "CRUD de tareas",
+      "Persistencia en la nube",
+    ],
+  },
+    //SISTEMA FACIAL
+  {
+    slug: "sis-facial",
+    titulo: "Sistema de Reconocimiento facial y Dactical",
+    descripcionCorta: "Sistema moderno enfocado en el reconocimiento biometrico facial y dacticalr para la gestión de espacios de trabajo",
+    descripcionCompleta:
+      "Solución inteligente para la identificacion segura, rapida y confiable hecha con Laravel y Google cloud. Ideal para empresas, instituciones y sistemas de control de acceso modernos para cualquier espacio de trabajo",
+    fecha: "2025-06-12",
+    tecnologias: ["Vue.js", "Firebase"],
+    imagenes: [
+      "/images/proyectos/facialcapt.png",
+      "/images/proyectos/facialcapt2.png",
+    ],
+    github: "https://github.com/tuusuario/app-tareas",
+    demo: "https://app-tareas.web.app",
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    caracteristicas: [
+      "Login con Google",
+      "CRUD de tareas",
+      "Persistencia en la nube",
+    ],
+  },
   //RESTAURANTE
   {
     slug: "restaurante",
@@ -25,7 +70,6 @@ export const proyectos = [
       "Envio de correos y mensajes hacia Email y WhatsApp",
     ],
   },
-
   //MOTORES
   {
     slug: "motores",
@@ -48,31 +92,7 @@ export const proyectos = [
       "Persistencia en la nube",
     ],
   },
-
-  //SISTEMA FACIAL
-  {
-    slug: "sis-facial",
-    titulo: "Sistema de Reconocimiento facial y Dactical",
-    descripcionCorta: "Sistema moderno enfocado en el reconocimiento biometrico facial y dacticalr para la gestión de espacios de trabajo",
-    descripcionCompleta:
-      "Solución inteligente para la identificacion segura, rapida y confiable hecha con Laravel y Google cloud. Ideal para empresas, instituciones y sistemas de control de acceso modernos para cualquier espacio de trabajo",
-    fecha: "2025-06-12",
-    tecnologias: ["Vue.js", "Firebase"],
-    imagenes: [
-      "/images/proyectos/facialcapt.png",
-      "/images/proyectos/facialcapt2.png",
-    ],
-    github: "https://github.com/tuusuario/app-tareas",
-    demo: "https://app-tareas.web.app",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    caracteristicas: [
-      "Login con Google",
-      "CRUD de tareas",
-      "Persistencia en la nube",
-    ],
-  },
-
-  //SISTEMA SOLIDARIA
+      //SISTEMA SOLIDARIA
   {
     slug: "solidaria",
     titulo: "Sistema para Farmacias Solidaria",
@@ -85,30 +105,6 @@ export const proyectos = [
       "/images/proyectos/farmsolidcapt.png",
       "/images/proyectos/farmsolidcapt2.png",
       "/images/proyectos/farmsolidcapt3.png",
-    ],
-    github: "https://github.com/tuusuario/app-tareas",
-    demo: "https://app-tareas.web.app",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    caracteristicas: [
-      "Login con Google",
-      "CRUD de tareas",
-      "Persistencia en la nube",
-    ],
-  },
-
-  //ADMINISTRACION
-  {
-    slug: "administracion",
-    titulo: "Sistema de administración de productos tecnologicos",
-    descripcionCorta: "Aplicación encargada del registro de servicios tecnologicos exclusivos de desarrollo.",
-    descripcionCompleta:
-      "Aplicación enfocada en la productividad personal, permite crear, editar y eliminar tareas con autenticación segura usando Firebase.",
-    fecha: "2024-05-02",
-    tecnologias: ["Vue.js", "Firebase"],
-    imagenes: [
-      "/images/proyectos/adminiscapt.png",
-      "/images/proyectos/adminiscapt2.png",
-      "/images/proyectos/adminiscapt3.png",
     ],
     github: "https://github.com/tuusuario/app-tareas",
     demo: "https://app-tareas.web.app",
